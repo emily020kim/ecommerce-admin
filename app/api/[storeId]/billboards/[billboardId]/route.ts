@@ -3,25 +3,26 @@ import { auth } from "@clerk/nextjs";
 
 import prismadb from "@/lib/prismadb";
 
+
 export async function GET(
     req: Request,
     { params }: { params: { billboardId: string } }
-  ) {
+) {
     try {
-        if (!params.billboardId) {
-            return new NextResponse("Billboard id is required", { status: 400 });
-        }
+      if (!params.billboardId) {
+        return new NextResponse("Billboard id is required", { status: 400 });
+      }
   
-        const billboard = await prismadb.billboard.findUnique({
-            where: {
-                id: params.billboardId,
-            }
-        });
+      const billboard = await prismadb.billboard.findUnique({
+        where: {
+          id: params.billboardId,
+        }
+      });
     
-        return NextResponse.json(billboard);
+      return NextResponse.json(billboard);
     } catch (error) {
-        console.log('[BILLBOARD_GET]', error);
-        return new NextResponse("Internal error", { status: 500 });
+      console.log('[BILLBOARD_GET]', error);
+      return new NextResponse("Internal error", { status: 500 });
     }
 };
 
@@ -45,20 +46,20 @@ export async function PATCH(
 
     if (!imageUrl) {
         return new NextResponse("Image URL is required", { status: 400 });
-    }
+      }
 
     if (!params.billboardId) {
       return new NextResponse("Billboard id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeById = await prismadb.store.findFirst({
         where: {
             id: params.storeId,
             userId
         }
     });
 
-    if (!storeByUserId) {
+    if (!storeById) {
         return new NextResponse("Unauthorized", { status: 403 });
     }
 
@@ -79,7 +80,6 @@ export async function PATCH(
   }
 };
 
-
 export async function DELETE(
   req: Request,
   { params }: { params: { storeId: string, billboardId: string } }
@@ -95,14 +95,14 @@ export async function DELETE(
       return new NextResponse("Billboard id is required", { status: 400 });
     }
 
-    const storeByUserId = await prismadb.store.findFirst({
+    const storeById = await prismadb.store.findFirst({
         where: {
             id: params.storeId,
             userId
         }
     });
 
-    if (!storeByUserId) {
+    if (!storeById) {
         return new NextResponse("Unauthorized", { status: 403 });
     }
 

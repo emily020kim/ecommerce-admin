@@ -28,14 +28,14 @@ export async function POST(
             return new NextResponse("Store id is required", { status: 400 });
         }
 
-        const storeByUserId = await prismadb.store.findFirst({
+        const storeById = await prismadb.store.findFirst({
             where: {
                 id: params.storeId,
                 userId
             }
         });
 
-        if (!storeByUserId) {
+        if (!storeById) {
             return new NextResponse("Unauthorized", { status: 403 });
         }
 
@@ -50,8 +50,8 @@ export async function POST(
         return NextResponse.json(billboard);
     } catch (error) {
         console.log("[BILLBOARDS_POST]", error);
-        return new NextResponse("Internal error", { status: 500 });
-    }
+        return new NextResponse("internal error", { status: 500 });
+    };
 };
 
 export async function GET(
@@ -65,13 +65,13 @@ export async function GET(
 
         const billboards = await prismadb.billboard.findMany({
             where: {
-                storeId: params.storeId
+                storeId: params.storeId,
             }
         });
 
         return NextResponse.json(billboards);
     } catch (error) {
         console.log("[BILLBOARDS_GET]", error);
-        return new NextResponse("Internal error", { status: 500 });
-    }
+        return new NextResponse("internal error", { status: 500 });
+    };
 };

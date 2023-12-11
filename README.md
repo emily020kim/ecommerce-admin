@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+Deployed Website on Vercel: https://krew-admin-emilys-projects-e64d5e6b.vercel.app/
+
+How to run on Docker: docker run -p 3000:3000 krew-admin
+
 ## Getting Started
 
 First, run the development server:

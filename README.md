@@ -2,7 +2,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 Deployed Website on Vercel: https://krew-admin-emilys-projects-e64d5e6b.vercel.app/
 
-How to run on Docker: docker run -p 3000:3000 krew-admin
+Docker Install and Setup:
+
+Install Docker on your machine. Then, either run the pre-built image we’ve provided on Docker Hub, or build the image yourself from the source code. To build the image yourself run:
+1. docker build -t krew .
+2. docker run -p 3000:3000 krew
 
 ## Getting Started
 
